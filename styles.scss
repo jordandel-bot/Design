@@ -65,102 +65,32 @@ label {
   grid-template-columns: 4rem auto 70px;
   align-items: center;
 }
-// Variables
-$yellow: #ffd54a;
-$yellow-dark: #f2c200;
-$text: #111;
-$radius: 12px;
-$duration: 220ms;
-$easing: cubic-bezier(.2,.9,.2,1);
 
-// Centrer le contenu du form
-.form-center {
-  display: block;
-  width: 100%;
-  max-width: 480px;
-  margin: 0 auto;
-  padding: 1rem;
+// état par défaut : inactif si le form n'a pas la classe
+form:not(.has-selection) .btn-continue {
+  background: #d1d1d1;
+  color: #777;
+  cursor: not-allowed;
+  pointer-events: none;
+  box-shadow: none;
+  transform: none;
 }
 
-// Option 1: centrer via wrapper
-.form-actions {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1rem;
-}
-
-// Bouton
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: .5rem;
-  padding: .7rem 1.4rem;
-  border-radius: $radius;
-  border: none;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 1rem;
-  color: $text;
+// état actif : quand le form a la classe
+form.has-selection .btn-continue {
   background: linear-gradient(180deg, $yellow, $yellow-dark);
+  color: $text;
+  cursor: pointer;
+  pointer-events: auto;
   box-shadow: 0 8px 20px rgba(34,34,34,0.12);
-  position: relative;
-  overflow: hidden;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  transition: transform $duration $easing, box-shadow $duration $easing, opacity $duration $easing;
-
-  // texte au-dessus des pseudo-éléments
-  > * { position: relative; z-index: 2; }
-
-  // effet de balayage léger
-  &::after {
-    content: "";
-    position: absolute;
-    top: -10%;
-    left: -40%;
-    width: 60%;
-    height: 120%;
-    background: rgba(255,255,255,0.18);
-    transform: rotate(18deg) translateX(-120%);
-    transition: transform 420ms $easing;
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  &:hover::after {
-    transform: rotate(18deg) translateX(40%);
-  }
-
-  // Hover / focus / active
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 18px 36px rgba(34,34,34,0.16);
-  }
-
-  &:active {
-    transform: translateY(0);
-    box-shadow: 0 8px 16px rgba(34,34,34,0.12);
-  }
-
-  &:focus-visible {
-    outline: 3px solid rgba(242,194,0,0.22);
-    outline-offset: 4px;
-  }
-
-  // état désactivé
-  &:disabled,
-  &.is-disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-  }
 }
 
-// Respecter les préférences de réduction d'animation
-@media (prefers-reduced-motion: reduce) {
-  .btn { transition: none; transform: none; }
-  .btn::after { transition: none; }
+
+form:has(input[type="radio"]:checked) .btn-continue {
+  background: linear-gradient(180deg, $yellow, $yellow-dark);
+  pointer-events: auto;
+}
+form:not(:has(input[type="radio"]:checked)) .btn-continue {
+  background: #d1d1d1;
+  pointer-events: none;
 }

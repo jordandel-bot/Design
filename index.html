@@ -14,7 +14,7 @@
   </head>
 
   <body>
-    <form method="" action="">
+    <form class="has-selection">
       <div class="hero">
         <img class="front" src="front.png" alt="Description" />
       </div>
@@ -42,10 +42,45 @@
         </label>
       </div>
       <div class="form-actions">
-        <button class="btn btn-continue" type="submit" aria-label="Continuer">
+        <button
+          class="btn btn-continue"
+          type="submit"
+          aria-label="Continuer"
+          disabled
+          aria-disabled="true"
+        >
           Continuer
         </button>
       </div>
     </form>
+    <script>
+      (function () {
+        const form = document.querySelector("form");
+        if (!form) return;
+
+        const radios = Array.from(
+          form.querySelectorAll("input[type='radio'][name]"),
+        );
+        const btn = form.querySelector(".btn-continue");
+
+        if (!btn || radios.length === 0) return;
+
+        const updateState = () => {
+          const anyChecked = radios.some((r) => r.checked);
+          form.classList.toggle("has-selection", anyChecked);
+          // Désactive/active le bouton de façon accessible
+          btn.disabled = !anyChecked;
+          btn.setAttribute("aria-disabled", String(!anyChecked));
+        };
+
+        // Écouteurs
+        radios.forEach((r) => r.addEventListener("change", updateState));
+
+        // Initialisation au chargement (au cas où une option serait pré-cochée)
+        document.addEventListener("DOMContentLoaded", updateState);
+        // Et exécution immédiate si le script est chargé après le DOM
+        updateState();
+      })();
+    </script>
   </body>
 </html>
