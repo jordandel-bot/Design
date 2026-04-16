@@ -1,46 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
-
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 h1 {
   /* Choisir  mon expérience : */
-
-
-
   font-style: normal;
   font-weight: 700;
   font-size: 26px;
   line-height: 26px;
   /* or 100% */
   letter-spacing: -0.04em;
-
   color: #333333;
-
-
 }
 
 form {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-weight: 450;
   margin: 3rem;
   margin-inline: auto;
-  background: #0001;
+  background: rgba(0, 0, 0, 0.0666666667);
   max-width: 30rem;
   padding: 4rem;
   border-radius: 3rem;
 }
 
 input {
-  $s: 2rem;
-  width: $s;
-  height: $s;
-  appearance: none;
-  border: $s/10 solid #333333;
-  border-radius: $s;
-
-  &:checked {
-    background: #333333;
-    box-shadow: inset 0 0 0 $s/4 #fff;
-  }
+  width: 2rem;
+  height: 2rem;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 0.2rem solid #333333;
+  border-radius: 2rem;
+}
+input:checked {
+  background: #333333;
+  box-shadow: inset 0 0 0 0.5rem #fff;
 }
 
 .geo-icon {
@@ -64,4 +57,4 @@ label {
   display: grid;
   grid-template-columns: 4rem auto 70px;
   align-items: center;
-}
+}/*# sourceMappingURL=styles.css.map */
